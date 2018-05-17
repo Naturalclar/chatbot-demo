@@ -1,3 +1,6 @@
 module.exports = {
-    "extends": "airbnb-base"
+    "extends": "google",
+    "parserOptions": {
+        "ecmaVersion": 6
+      }
 };
