@@ -27,7 +27,7 @@ const fulfillment = functions.https.onRequest((request, response) => {
    */
   function survey(agent) {
     const {givenName, lastName, rating} = agent.getContext('login');
-
+    agent.add(Json.stringify(agent.getContext('login')));
     agent.add(`Thank you very much for input, ${givenName}!
     Your answer was "${rating}"`);
     const input = [givenName, lastName, rating];
