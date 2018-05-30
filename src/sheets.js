@@ -114,7 +114,7 @@ function appendName(auth, input) {
   const sheets = google.sheets({version: 'v4', auth});
   sheets.spreadsheets.values.append({
     spreadsheetId: '1wvmC4MHaBWalE9xF4e5EMrveaq67atOKI6XydfrrGXw',
-    range: 'Class Data!A2:E',
+    range: 'Pepper Log!A2:E',
     valueInputOption: 'RAW',
     resource: body,
   }, (err, {data}) => {

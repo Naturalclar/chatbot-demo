@@ -34,7 +34,27 @@ const fulfillment = functions.https.onRequest((request, response) => {
     const input = [
       givenName,
       lastName,
+      '',
       rating,
+      moment().tz('America/Los_Angeles').format(),
+    ];
+    sheets.start(input);
+  }
+
+  /**
+   * Checkin Logs the symptom of visitor
+   * @param {WebhookClient} agent
+   */
+  function checkin(agent) {
+    const {givenName, lastName, symptom} = agent.getContext('login').parameters;
+    agent.add(`Thank you ${givenName}, 
+    Your number will soon be called. 
+    Your waiting number is A34`);
+    const input = [
+      givenName,
+      lastName,
+      symptom,
+      '',
       moment().tz('America/Los_Angeles').format(),
     ];
     sheets.start(input);
@@ -44,6 +64,7 @@ const fulfillment = functions.https.onRequest((request, response) => {
   intentMap.set('Default Welcome Intent', welcome);
   intentMap.set('Default Fallback Intent', fallback);
   intentMap.set('Survey Result', survey);
+  intentMap.set('OtherSymptoms - yes', checkin);
   agent.handleRequest(intentMap);
 });
 
