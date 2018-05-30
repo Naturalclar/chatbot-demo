@@ -2,7 +2,9 @@
 
 const {WebhookClient} = require('dialogflow-fulfillment');
 const functions = require('firebase-functions');
+const moment = require('moment');
 const sheets = require('./src/sheets');
+
 
 const fulfillment = functions.https.onRequest((request, response) => {
   const agent = new WebhookClient({request, response});
@@ -27,10 +29,14 @@ const fulfillment = functions.https.onRequest((request, response) => {
    */
   function survey(agent) {
     const {givenName, lastName, rating} = agent.getContext('login').parameters;
-    agent.add(JSON.stringify(agent.getContext('login').parameters));
-    agent.add(`Thank you very much for input, ${givenName}!
-    Your answer was "${rating}"`);
-    const input = [givenName, lastName, rating];
+    agent.add(`Thank you very much for your input, ${givenName}!
+    The rating you gave me was "${rating}"`);
+    const input = [
+      givenName,
+      lastName,
+      rating,
+      moment().tz('America/LosAngeles').format(),
+    ];
     sheets.start(input);
   }
 

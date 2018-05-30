@@ -25,10 +25,11 @@ const start = (input) => {
  * Create an OAuth2 client with the given credentials, and then execute the
  * given callback function.
  * @param {Object} credentials The authorization client credentials.
+ * @param {Array.Strings} input Values to be inputted in sheets.
  * @param {function} callback The callback to call with the authorized client.
  */
 function authorize(credentials, input, callback) {
-  const {client_secret, client_id, redirect_uris} = credentials.installed;
+  const {client_secret, client_id, redirect_uris} = credentials.installed; // eslint-disable-line
   const oAuth2Client = new google.auth.OAuth2(
       client_id, client_secret, redirect_uris[0]);
 
