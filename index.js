@@ -8,12 +8,7 @@ const fulfillment = functions.https.onRequest((request, response) => {
   const agent = new WebhookClient({request, response});
   console.log('Request headers: ' + JSON.stringify(request.headers));
   console.log('Request body: ' + JSON.stringify(request.body));
-  /*const responseJson = {};
-  responseJson.fulfillmentText = [{
-    text: `Hello World from ResponseJson!`,
-  }];
-  response.json(responseJson);
-  */
+
   /** @param {WebhookClient} agent */
   function welcome(agent) {
     agent.add('Starting Function');
@@ -26,9 +21,20 @@ const fulfillment = functions.https.onRequest((request, response) => {
     agent.add(`I'm sorry, can you try again?`);
   }
 
+  /**
+   * Survey gets survey results and upload it onto sheets
+   * @param {WebhookClient} agent
+   */
+  function survey(agent) {
+    agent.add(`Thank you very much for input! 
+    Your answer was ${agent.parameters}`);
+    sheets.start();
+  }
+
   let intentMap = new Map();
   intentMap.set('Default Welcome Intent', welcome);
   intentMap.set('Default Fallback Intent', fallback);
+  intentMap.set('Survey Result', survey);
   agent.handleRequest(intentMap);
 });
 
