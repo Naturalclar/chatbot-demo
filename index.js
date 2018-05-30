@@ -27,7 +27,7 @@ const fulfillment = functions.https.onRequest((request, response) => {
    */
   function survey(agent) {
     agent.add(`Thank you very much for input! 
-    Your answer was ${agent.parameters}`);
+    Your answer was ${agent.parameters.Rating}`);
     sheets.start();
   }
 
