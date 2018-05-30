@@ -7,11 +7,16 @@ const SCOPES = ['https://www.googleapis.com/auth/spreadsheets'];
 const TOKEN_PATH = './configs/credentials.json';
 
   // Load client secrets from a local file.
-const start = () => {
+
+/**
+ * start
+ * @param {Object} input
+ */
+const start = (input) => {
   fs.readFile('./configs/client_secret.json', (err, content) => {
     if (err) return console.log('Error loading client secret file:', err);
     // Authorize a client with credentials, then call the Google Sheets API.
-    authorize(JSON.parse(content), appendName);
+    authorize(JSON.parse(content), input, appendName);
     });
 };
 
@@ -22,7 +27,7 @@ const start = () => {
  * @param {Object} credentials The authorization client credentials.
  * @param {function} callback The callback to call with the authorized client.
  */
-function authorize(credentials, callback) {
+function authorize(credentials, input, callback) {
   const {client_secret, client_id, redirect_uris} = credentials.installed;
   const oAuth2Client = new google.auth.OAuth2(
       client_id, client_secret, redirect_uris[0]);
@@ -31,7 +36,7 @@ function authorize(credentials, callback) {
   fs.readFile(TOKEN_PATH, (err, token) => {
     if (err) return getNewToken(oAuth2Client, callback);
     oAuth2Client.setCredentials(JSON.parse(token));
-    callback(oAuth2Client);
+    callback(oAuth2Client, input);
   });
 }
 
@@ -94,10 +99,11 @@ function listMajors(auth) {
 /**
  * Appends data to spreadsheet
  * @param {google.auth.OAuth2} auth The authenticated Google OAuth client. 
+ * @param {Array.string} input values to be input in the sheets
  */
-function appendName(auth) {
+function appendName(auth, input) {
   const values = [
-    ['Zack', 'Male', '4. Senior', 'FL', 'Art', 'Basketball'],
+    input,
   ];
 
   const body = {values};

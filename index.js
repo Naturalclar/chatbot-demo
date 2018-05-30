@@ -26,9 +26,12 @@ const fulfillment = functions.https.onRequest((request, response) => {
    * @param {WebhookClient} agent
    */
   function survey(agent) {
-    agent.add(`Thank you very much for input! 
-    Your answer was ${agent.parameters.Rating}`);
-    sheets.start();
+    const {givenName, lastName, rating} = agent.getContext('login').parameters;
+
+    agent.add(`Thank you very much for input, ${givenName}!
+    Your answer was "${rating}"`);
+    const input = [givenName, lastName, rating];
+    sheets.start(input);
   }
 
   let intentMap = new Map();
