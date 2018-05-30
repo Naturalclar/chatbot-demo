@@ -26,8 +26,8 @@ const fulfillment = functions.https.onRequest((request, response) => {
    * @param {WebhookClient} agent
    */
   function survey(agent) {
-    const {givenName, lastName, rating} = agent.getContext('login');
-    agent.add(JSON.stringify(agent.getContext('login')));
+    const {givenName, lastName, rating} = agent.getContext('login').parameters;
+    agent.add(JSON.stringify(agent.getContext('login').parameters));
     agent.add(`Thank you very much for input, ${givenName}!
     Your answer was "${rating}"`);
     const input = [givenName, lastName, rating];
