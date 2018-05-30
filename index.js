@@ -2,7 +2,7 @@
 
 const {WebhookClient} = require('dialogflow-fulfillment');
 const functions = require('firebase-functions');
-const sheets = require('.src/sheets');
+const sheets = require('./src/sheets');
 
 const fulfillment = functions.https.onRequest((request, response) => {
   const agent = new WebhookClient({request, response});

@@ -4,15 +4,17 @@ const {google} = require('googleapis');
 
 // If modifying these scopes, delete credentials.json.
 const SCOPES = ['https://www.googleapis.com/auth/spreadsheets'];
-const TOKEN_PATH = 'credentials.json';
+const TOKEN_PATH = './configs/credentials.json';
 
   // Load client secrets from a local file.
-const start = fs.readFile('client_secret.json', (err, content) => {
+const start = () => {
+  fs.readFile('./configs/client_secret.json', (err, content) => {
     if (err) return console.log('Error loading client secret file:', err);
     // Authorize a client with credentials, then call the Google Sheets API.
     authorize(JSON.parse(content), appendName);
-  });
+    });
 };
+
 
 /**
  * Create an OAuth2 client with the given credentials, and then execute the
@@ -112,4 +114,4 @@ function appendName(auth) {
   });
 }
 
-exports.start = start;
+module.exports.start = start;
