@@ -2,8 +2,7 @@
 
 const {WebhookClient} = require('dialogflow-fulfillment');
 const functions = require('firebase-functions');
-const moment = require('moment');
-require('moment-timezone');
+const moment = require('moment-timezone');
 const sheets = require('./src/sheets');
 
 

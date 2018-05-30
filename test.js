@@ -1,6 +1,5 @@
 const sheets = require('./src/sheets');
-const moment = require('moment');
-require('moment-timezone');
+const moment = require('moment-timezone');
 
 const input = [
   'John',
