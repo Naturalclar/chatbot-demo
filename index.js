@@ -8,12 +8,12 @@ const fulfillment = functions.https.onRequest((request, response) => {
   const agent = new WebhookClient({request, response});
   console.log('Request headers: ' + JSON.stringify(request.headers));
   console.log('Request body: ' + JSON.stringify(request.body));
-  const responseJson = {};
-  responseJson.fulfillmentMessages = [{
+  /*const responseJson = {};
+  responseJson.fulfillmentText = [{
     text: `Hello World from ResponseJson!`,
   }];
   response.json(responseJson);
-
+  */
   /** @param {WebhookClient} agent */
   function welcome(agent) {
     agent.add('Starting Function');
