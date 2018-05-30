@@ -3,6 +3,7 @@
 const {WebhookClient} = require('dialogflow-fulfillment');
 const functions = require('firebase-functions');
 const moment = require('moment');
+require('moment-timezone');
 const sheets = require('./src/sheets');
 
 
@@ -35,7 +36,7 @@ const fulfillment = functions.https.onRequest((request, response) => {
       givenName,
       lastName,
       rating,
-      moment().tz('America/LosAngeles').format(),
+      moment().tz('America/Los_Angeles').format(),
     ];
     sheets.start(input);
   }
