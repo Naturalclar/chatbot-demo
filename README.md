@@ -1,5 +1,7 @@
 # Chatbot Demo
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/Naturalclar/chatbot-demo.svg)](https://greenkeeper.io/)
+
 Function file to be used with Dialogflow Fulfillment and Firebase Cloud Function
 
 ## Notes
